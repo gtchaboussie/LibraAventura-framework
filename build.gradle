@@ -344,6 +344,8 @@ sourceSets {
         }
         groovy {
             srcDirs = getDirectoryInActiveComponentsIfExists('src/test/groovy')
+            // SPECIFIC
+            srcDirs += getDirectoryInActiveComponentsIfExists('src/testtools/groovy')
         }
         resources {
             srcDirs = getDirectoryInActiveComponentsIfExists('src/test/resources')
