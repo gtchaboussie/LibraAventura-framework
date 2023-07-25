@@ -141,7 +141,12 @@ defaultTasks 'jar', 'test'
 
 allprojects {
     repositories {
-        mavenCentral()
+        // TERRA-SPECIFIC
+        mavenCentral {
+            content {
+                excludeModule("javax.media", "jai_core")
+            }
+        }
         // the switch from jCenter to mavenCentral needs some additional repositories to be configured here
         // this should be checked frequently to remove obsolete configurations if the artifacts are available
         // on mavenCentral directly
@@ -170,7 +175,10 @@ allprojects {
             // org.cyberneko.html.parsers (used by UELFunctions, was in esapi before 2.3)
             url "https://repository.ow2.org/nexus/content/repositories/public/"
         }
-
+        // TERRA-SPECIFIC
+        maven {
+            url 'https://repo.osgeo.org/repository/release/'
+        }
     }
 }
 
@@ -219,6 +227,7 @@ dependencies {
         exclude  group: 'bouncycastle', module: 'bcprov-jdk14'
         exclude  group: 'bouncycastle', module: 'bctsp-jdk14'
     }
+    implementation 'org.geotools:gt-main:29.0'
     implementation 'com.sun.mail:javax.mail:1.6.2'
     implementation 'com.rometools:rome:1.18.0'
     implementation 'com.thoughtworks.xstream:xstream:1.4.19'
